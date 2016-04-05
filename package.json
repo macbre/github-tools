@@ -4,8 +4,8 @@
   "description": "GitHub toolbox",
   "main": "index.js",
   "dependencies": {
-     "github": ">=0.1.12",
-     "npmlog": ">=0.0.6"
+    "github": "^0.2.4",
+    "npmlog": "^2.0.3"
   },
   "license": "BSD"
 }
