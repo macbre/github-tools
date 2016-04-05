@@ -30,10 +30,13 @@ github.repos.getContributors({
 		return;
 	}
 
+	log.info('API', 'Got %d contributor(s)', contributors.length);
+
 	var ret = [];
 
 	contributors.forEach(function(contributor) {
-		ret.push(format('* [%s](https://github.com/%s)',
+		ret.push(
+			format('%s (https://github.com/%s)',
 			contributor.login,
 			contributor.login
 		));
