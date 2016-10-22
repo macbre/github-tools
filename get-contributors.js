@@ -22,7 +22,7 @@ github = new api({
 });
 
 github.repos.getContributors({
-	user: user,
+	owner: user,
 	repo: project
 }, function(err, contributors) {
 	if (err) {
