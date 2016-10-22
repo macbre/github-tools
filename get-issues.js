@@ -22,8 +22,8 @@ github = new api({
 	version: "3.0.0",
 });
 
-github.issues.repoIssues({
-	user: user,
+github.issues.getForRepo({
+	owner: user,
 	repo: project,
 	milestone: milestone,
 	state: 'closed',
@@ -34,11 +34,14 @@ github.issues.repoIssues({
 		return;
 	}
 
+
 	var ret = [];
 
 	issues.forEach(function(issue) {
-		ret.push(format('* #%d - %s%s',
+		var type = issue.labels[0].name; // .reduce((label, acc) => label.name);
+		ret.push(format('* #%d [%s] - %s%s',
 			issue.number,
+			type,
 			issue.title,
 			(issue.user.login !== user ? (' (by @' + issue.user.login + ')') : '')
 		));
