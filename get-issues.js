@@ -34,12 +34,13 @@ github.issues.getForRepo({
 		return;
 	}
 
+	user = 'macbre';
 
 	var ret = [];
 
 	issues.forEach(function(issue) {
-		var type = issue.labels[0].name; // .reduce((label, acc) => label.name);
-		ret.push(format('* #%d [%s] - %s%s',
+		var type = (issue.labels[0] || {name: "pr"}).name; // .reduce((label, acc) => label.name);
+		ret.push(format('* #%d `%s` - %s%s',
 			issue.number,
 			type,
 			issue.title,
