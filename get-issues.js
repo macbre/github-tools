@@ -6,10 +6,9 @@
  * Example:
  *  ./get-issues.js macbre/phantomas 7
  */
-var api = require('@octokit/rest'),
+const { Octokit } = require("@octokit/rest"),
 	log = require('npmlog'),
-	format = require('util').format,
-	github;
+	format = require('util').format;
 
 var argv = process.argv.slice(2),
 	user = argv[0].split('/')[0],
@@ -18,24 +17,17 @@ var argv = process.argv.slice(2),
 
 log.info('GIT', 'Getting closed issues from %s/%s for milestone #%d', user, project, milestone);
 
-github = new api({
+const github = new Octokit({
 	version: "3.0.0",
 });
 
-github.issues.getForRepo({
+github.paginate(github.issues.listForRepo, {
 	owner: user,
 	repo: project,
 	milestone: milestone,
 	state: 'closed',
 	direction: 'asc'
-}, function(err, issues) {
-	if (err) {
-		log.error('API', '#%d: %s', err.code, err.message);
-		return;
-	}
-
-	user = 'macbre';
-
+}).then(function(issues) {
 	var ret = [];
 
 	issues.forEach(function(issue) {
