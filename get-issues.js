@@ -6,7 +6,7 @@
  * Example:
  *  ./get-issues.js macbre/phantomas 7
  */
-var api = require('github'),
+var api = require('@octokit/rest'),
 	log = require('npmlog'),
 	format = require('util').format,
 	github;

@@ -4,7 +4,7 @@
   "description": "GitHub toolbox",
   "main": "index.js",
   "dependencies": {
-    "github": "^14.0.0",
+    "@octokit/rest": "^18.0.3",
     "npmlog": "^4.0.0"
   },
   "license": "BSD"
