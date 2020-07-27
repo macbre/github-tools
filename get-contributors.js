@@ -6,10 +6,9 @@
  * Example:
  *  ./get-contributors.js macbre/phantomas
  */
-var api = require('github'),
+const { Octokit } = require("@octokit/rest"),
 	log = require('npmlog'),
-	format = require('util').format,
-	github;
+	format = require('util').format;
 
 var argv = process.argv.slice(2),
 	user = argv[0].split('/')[0],
@@ -17,19 +16,14 @@ var argv = process.argv.slice(2),
 
 log.info('GIT', 'Getting contributors of %s/%s', user, project);
 
-github = new api({
+const github = new Octokit({
 	version: "3.0.0",
 });
 
-github.repos.getContributors({
+github.paginate(github.repos.listContributors, {
 	owner: user,
 	repo: project
-}, function(err, contributors) {
-	if (err) {
-		log.error('API', '#%d: %s', err.code, err.message);
-		return;
-	}
-
+}).then(function(contributors) {
 	log.info('API', 'Got %d contributor(s)', contributors.length);
 
 	var ret = [];
