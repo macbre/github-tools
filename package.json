@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@octokit/rest": "^19.0.1",
-    "npmlog": "^6.0.0"
+    "npmlog": "^7.0.0"
   },
   "license": "BSD"
 }
